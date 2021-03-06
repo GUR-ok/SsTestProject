@@ -24,7 +24,7 @@ public class HTMLDownloader {
                 url = bufReader.readLine();
                 downloadUsingStream(url, tmpFile);
             } catch (Exception e) {
-                System.out.println("Некорректный URL! Пожалуйста введите корректный адрес файла:");
+                System.out.println("Некорректный URL! Пожалуйста введите корректный адрес:");
                 logger.error("Incorrect url!");
             }
         }

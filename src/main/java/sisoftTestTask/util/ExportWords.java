@@ -25,12 +25,19 @@ public class ExportWords {
         ExportWords.exportWords = exp;
     }
 
-    public static void export(Map<String, Integer> map, String address) {
+    public static void export(Map<String, Integer> map, String address){
         System.out.println("Saving results to DB...");
-        for (Map.Entry<String, Integer> entry : map.entrySet()){
-            WordItem item = new WordItem(entry.getKey(),entry.getValue(),address);
-            exportWords.wordRepository.saveAndFlush(item);
+        try {
+            for (Map.Entry<String, Integer> entry : map.entrySet()) {
+                WordItem item = new WordItem(entry.getKey(), entry.getValue(), address);
+                exportWords.wordRepository.saveAndFlush(item);
+            }
+        } catch (Exception e) {
+            logger.error("DB communication Error!");
+            System.out.println("DB communication Error!");
+            System.exit(1);
         }
         System.out.println("Count results for " + address + " exported to Database");
+        System.exit(1);
     }
 }

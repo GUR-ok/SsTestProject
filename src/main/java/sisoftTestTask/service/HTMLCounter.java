@@ -37,11 +37,7 @@ public class HTMLCounter {
             Map<String, Integer> map = counter.countWords(parsedText);
             PrintWords.print(map);
             SaveWords.save(map, address);
-            try {
-                ExportWords.export(map, address);
-            } catch (Exception e) {
-                System.out.println(e);
-            }
+            ExportWords.export(map, address);
         } catch (IOException e) {
             e.printStackTrace();
             logger.error("File download/parse error!");
