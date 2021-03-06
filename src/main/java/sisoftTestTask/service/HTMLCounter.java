@@ -4,9 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import sisoftTestTask.util.ExportWords;
-import sisoftTestTask.util.PrintWords;
-import sisoftTestTask.util.SaveWords;
+import sisoftTestTask.util.*;
 
 import java.io.*;
 import java.util.Map;
@@ -15,34 +13,41 @@ import java.util.Map;
 public class HTMLCounter {
 
     static final Logger logger = LoggerFactory.getLogger(HTMLCounter.class);
+
     @Autowired
-    HTMLDownloader downloader;
-    @Autowired
-    FileParser parser;
+    Downloader downloader;
+
     @Autowired
     WordCounter counter;
 
+    @Autowired
+    ExportWords exportWords;
+
     String address;
 
-    public HTMLCounter() {
-    }
-
+    /* Main service provides:
+    * - downloading HTML-page to temp file;
+    * - parsing words from HTML-content;
+    * - counting unique words;
+    * - printing words to console;
+    * - saving results to file;
+    * - exporting results to DataBase;
+    * - logging errors.
+    */
     public void countHtmlWords() {
         File file = null;
         try {
             file = downloader.download();
             address = downloader.url;
-            String parsedText = parser.parse(file);
-            System.out.printf("Body: %s", parsedText);
+            String parsedText = FileParser.parse(file);
             Map<String, Integer> map = counter.countWords(parsedText);
             PrintWords.print(map);
             SaveWords.save(map, address);
-            ExportWords.export(map, address);
+            exportWords.export(map, address);
         } catch (IOException e) {
             e.printStackTrace();
             logger.error("File download/parse error!");
         }
-
     }
 
 }

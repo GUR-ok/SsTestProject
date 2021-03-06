@@ -1,21 +1,21 @@
-package sisoftTestTask.service;
+package sisoftTestTask.util;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.IOException;
 
-@Service
+@Component
 public class FileParser {
 
     static final Logger logger = LoggerFactory.getLogger(FileParser.class);
 
-    public String parse(File file) throws IOException {
-
+    //Parsing words from HTML content file. Method uses Jsoup HTML parser, returns text from HTML as String
+    public static String parse(File file) throws IOException {
         Document document = Jsoup.parse(file, "UTF-8");
         logger.warn("File parsed successfully!");
         String title = document.title();

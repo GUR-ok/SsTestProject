@@ -1,11 +1,11 @@
 package sisoftTestTask;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
+import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.builder.SpringApplicationBuilder;
 import sisoftTestTask.service.HTMLCounter;
 import javax.annotation.PostConstruct;
-import java.io.*;
 
 
 @SpringBootApplication
@@ -23,8 +23,12 @@ public class TaskApplication {
         TaskApplication.statTask = task;
     }
 
-    public static void main(String[] args) throws IOException {
-        SpringApplication.run(TaskApplication.class, args);
+    //Starting Spring-Boot application. Calling for word-counter service
+    public static void main(String[] args) {
+        new SpringApplicationBuilder(TaskApplication.class)
+                .web(WebApplicationType.NONE)
+                .run(args);
         statTask.htmlCounter.countHtmlWords();
     }
+
 }

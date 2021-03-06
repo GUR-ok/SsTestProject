@@ -1,16 +1,16 @@
-package sisoftTestTask.service;
+package sisoftTestTask.util;
 
-import org.springframework.stereotype.Service;
-
+import org.springframework.stereotype.Component;
 import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
-@Service
+@Component
 public class WordCounter {
 
     private static final String DELIMITER = "[ ,.!?\'\";:()\n\r\t\\[\\]]";
 
+    //Method counts unique words in string and returns Map of words and counted values.
     public Map<String, Integer> countWords(String str) {
         String[] words = str.split(DELIMITER);
 

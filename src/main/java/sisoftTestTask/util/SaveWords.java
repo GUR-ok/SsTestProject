@@ -2,6 +2,7 @@ package sisoftTestTask.util;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -9,9 +10,13 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.UUID;
 
+@Component
 public class SaveWords {
+
     static final Logger logger = LoggerFactory.getLogger(SaveWords.class);
 
+    //Saving information to file: HTML-page address, parsed words with counted values.
+    //Filepath is "results/", file name is random UUID
     public static void save(Map<String, Integer> map, String address) {
         String RESULT_PATH = "results\\";
         File toSave = new File(RESULT_PATH+ UUID.randomUUID().toString() + ".txt");

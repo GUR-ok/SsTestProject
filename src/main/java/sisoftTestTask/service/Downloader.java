@@ -3,19 +3,19 @@ package sisoftTestTask.service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
-
 import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 
 
 @Service
-public class HTMLDownloader {
+public class Downloader {
 
-    static final Logger logger = LoggerFactory.getLogger(HTMLDownloader.class);
+    static final Logger logger = LoggerFactory.getLogger(Downloader.class);
     public String url;
-    public File download() throws IOException {
 
+    // Getting web-address and saving HTML-content to temp file.
+    public File download() throws IOException {
         File tmpFile = File.createTempFile("file", null);
         BufferedReader bufReader = new BufferedReader(new InputStreamReader(System.in));
         System.out.println("Введите адрес HTML-страницы для подсчета количества слов:");
